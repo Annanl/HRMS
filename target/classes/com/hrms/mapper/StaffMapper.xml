@@ -1,0 +1,362 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hrms.dao.StaffMapper" >
+  <resultMap id="BaseResultMap" type="com.hrms.pojo.Staff" >
+    <id column="sid" property="sid" jdbcType="INTEGER" />
+    <result column="tel" property="tel" jdbcType="VARCHAR" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="username" property="username" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="attendStatus" property="attendStatus" jdbcType="INTEGER" />
+    <result column="gender" property="gender" jdbcType="VARCHAR" />
+    <result column="position" property="position" jdbcType="VARCHAR" />
+    <result column="departmentId" property="departmentId" jdbcType="INTEGER" />
+    <result column="salary" property="salary" jdbcType="INTEGER" />
+    <result column="salaryStatus" property="salaryStatus" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    sid, tel, address, username, password, attendStatus, gender, position, departmentId, 
+    salary, salaryStatus
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.hrms.pojo.StaffExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from Staff
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from Staff
+    where sid = #{sid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from Staff
+    where sid = #{sid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.hrms.pojo.StaffExample" >
+    delete from Staff
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.hrms.pojo.Staff" >
+    insert into Staff (sid, tel, address, 
+      username, password, attendStatus, 
+      gender, position, departmentId, 
+      salary, salaryStatus)
+    values (#{sid,jdbcType=INTEGER}, #{tel,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
+      #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{attendStatus,jdbcType=INTEGER}, 
+      #{gender,jdbcType=VARCHAR}, #{position,jdbcType=VARCHAR}, #{departmentId,jdbcType=INTEGER}, 
+      #{salary,jdbcType=INTEGER}, #{salaryStatus,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hrms.pojo.Staff" >
+    insert into Staff
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="sid != null" >
+        sid,
+      </if>
+      <if test="tel != null" >
+        tel,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+      <if test="username != null" >
+        username,
+      </if>
+      <if test="password != null" >
+        password,
+      </if>
+      <if test="attendStatus != null" >
+        attendStatus,
+      </if>
+      <if test="gender != null" >
+        gender,
+      </if>
+      <if test="position != null" >
+        position,
+      </if>
+      <if test="departmentId != null" >
+        departmentId,
+      </if>
+      <if test="salary != null" >
+        salary,
+      </if>
+      <if test="salaryStatus != null" >
+        salaryStatus,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="sid != null" >
+        #{sid,jdbcType=INTEGER},
+      </if>
+      <if test="tel != null" >
+        #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="attendStatus != null" >
+        #{attendStatus,jdbcType=INTEGER},
+      </if>
+      <if test="gender != null" >
+        #{gender,jdbcType=VARCHAR},
+      </if>
+      <if test="position != null" >
+        #{position,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentId != null" >
+        #{departmentId,jdbcType=INTEGER},
+      </if>
+      <if test="salary != null" >
+        #{salary,jdbcType=INTEGER},
+      </if>
+      <if test="salaryStatus != null" >
+        #{salaryStatus,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.hrms.pojo.StaffExample" resultType="java.lang.Integer" >
+    select count(*) from Staff
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update Staff
+    <set >
+      <if test="record.sid != null" >
+        sid = #{record.sid,jdbcType=INTEGER},
+      </if>
+      <if test="record.tel != null" >
+        tel = #{record.tel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.address != null" >
+        address = #{record.address,jdbcType=VARCHAR},
+      </if>
+      <if test="record.username != null" >
+        username = #{record.username,jdbcType=VARCHAR},
+      </if>
+      <if test="record.password != null" >
+        password = #{record.password,jdbcType=VARCHAR},
+      </if>
+      <if test="record.attendStatus != null" >
+        attendStatus = #{record.attendStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.gender != null" >
+        gender = #{record.gender,jdbcType=VARCHAR},
+      </if>
+      <if test="record.position != null" >
+        position = #{record.position,jdbcType=VARCHAR},
+      </if>
+      <if test="record.departmentId != null" >
+        departmentId = #{record.departmentId,jdbcType=INTEGER},
+      </if>
+      <if test="record.salary != null" >
+        salary = #{record.salary,jdbcType=INTEGER},
+      </if>
+      <if test="record.salaryStatus != null" >
+        salaryStatus = #{record.salaryStatus,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update Staff
+    set sid = #{record.sid,jdbcType=INTEGER},
+      tel = #{record.tel,jdbcType=VARCHAR},
+      address = #{record.address,jdbcType=VARCHAR},
+      username = #{record.username,jdbcType=VARCHAR},
+      password = #{record.password,jdbcType=VARCHAR},
+      attendStatus = #{record.attendStatus,jdbcType=INTEGER},
+      gender = #{record.gender,jdbcType=VARCHAR},
+      position = #{record.position,jdbcType=VARCHAR},
+      departmentId = #{record.departmentId,jdbcType=INTEGER},
+      salary = #{record.salary,jdbcType=INTEGER},
+      salaryStatus = #{record.salaryStatus,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hrms.pojo.Staff" >
+    update Staff
+    <set >
+      <if test="tel != null" >
+        tel = #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null" >
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="attendStatus != null" >
+        attendStatus = #{attendStatus,jdbcType=INTEGER},
+      </if>
+      <if test="gender != null" >
+        gender = #{gender,jdbcType=VARCHAR},
+      </if>
+      <if test="position != null" >
+        position = #{position,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentId != null" >
+        departmentId = #{departmentId,jdbcType=INTEGER},
+      </if>
+      <if test="salary != null" >
+        salary = #{salary,jdbcType=INTEGER},
+      </if>
+      <if test="salaryStatus != null" >
+        salaryStatus = #{salaryStatus,jdbcType=INTEGER},
+      </if>
+    </set>
+    where sid = #{sid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hrms.pojo.Staff" >
+    update Staff
+    set tel = #{tel,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      username = #{username,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      attendStatus = #{attendStatus,jdbcType=INTEGER},
+      gender = #{gender,jdbcType=VARCHAR},
+      position = #{position,jdbcType=VARCHAR},
+      departmentId = #{departmentId,jdbcType=INTEGER},
+      salary = #{salary,jdbcType=INTEGER},
+      salaryStatus = #{salaryStatus,jdbcType=INTEGER}
+    where sid = #{sid,jdbcType=INTEGER}
+  </update>
+  <select id="selectByLogin" resultMap="BaseResultMap" parameterType="com.hrms.pojo.StaffExample" >
+    select
+    <include refid="Base_Column_List" />
+    from Staff
+    <where>
+      <if test="username!=null">
+        username=#{username}
+      </if>
+      <if test="password!=null">
+        and password=#{password}
+      </if>
+    </where>
+  </select>
+  <select id="selectStaffAllInfo" resultType="map" parameterType="com.hrms.pojo.Staff">
+    select * from Staff,Department
+    where Staff.departmentId=Department.pid
+    and Staff.sid=#{sid}
+  </select>
+  <select id="selectByPrimaryKeySelective" resultMap="BaseResultMap" parameterType="com.hrms.pojo.Staff">
+    select * from Staff
+    <trim prefix="where" suffixOverrides="and">
+      <if test="sid != null" >
+        sid = #{sid,jdbcType=INTEGER} and
+      </if>
+      <if test="tel != null" >
+         tel = #{tel,jdbcType=INTEGER} and
+      </if>
+      <if test="address != null" >
+         address = #{address,jdbcType=VARCHAR} and
+      </if>
+      <if test="username != null" >
+         username = #{username,jdbcType=VARCHAR} and
+      </if>
+      <if test="password != null" >
+         password = #{password,jdbcType=VARCHAR} and
+      </if>
+      <if test="attendStatus != null" >
+         attend_status = #{attendStatus,jdbcType=TINYINT} and
+      </if>
+      <if test="gender != null" >
+         gender = #{gender,jdbcType=VARCHAR} and
+      </if>
+      <if test="position != null" >
+        position =#{position,jdbcType=VARCHAR} and
+      </if>
+      <if test="departmentId != null" >
+         departmentId = #{departmentId,jdbcType=INTEGER} and
+      </if>
+      <if test="salary != null" >
+         salary = #{salary,jdbcType=INTEGER} and
+      </if>
+      <if test="salaryStatus != null" >
+         salaryStatus = #{salaryStatus,jdbcType=TINYINT}
+      </if>
+    </trim>
+  </select>
+</mapper>
