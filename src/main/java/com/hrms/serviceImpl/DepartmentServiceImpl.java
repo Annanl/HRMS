@@ -17,7 +17,7 @@ public class DepartmentServiceImpl implements DepartmentService {
     private DepartmentMapper departmentMapper;
     @Override
     public int insertSelective(Department record) {
-        return departmentMapper.insert(record);
+        return departmentMapper.insertSelective(record);
     }
 
     @Override

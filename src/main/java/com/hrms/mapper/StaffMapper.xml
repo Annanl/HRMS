@@ -317,9 +317,7 @@
     </where>
   </select>
   <select id="selectStaffAllInfo" resultType="map" parameterType="com.hrms.pojo.Staff">
-    select * from Staff,Department
-    where Staff.departmentId=Department.pid
-    and Staff.sid=#{sid}
+    SELECT * FROM Staff a LEFT JOIN Department b ON a.departmentId=b.pid WHERE a.sid=#{sid}
   </select>
   <select id="selectByPrimaryKeySelective" resultMap="BaseResultMap" parameterType="com.hrms.pojo.Staff">
     select * from Staff

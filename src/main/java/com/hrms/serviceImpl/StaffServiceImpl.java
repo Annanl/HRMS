@@ -26,7 +26,7 @@ public class StaffServiceImpl implements StaffService {
 
     @Override
     public int insertSelective(Staff record) {
-        return staffMapper.insert(record);
+        return staffMapper.insertSelective(record);
     }
 
     @Override
